@@ -1,2 +1,0 @@
-1,Rock,01/01/1960,Género de música popular que se originó como rock and roll en la década de 1950.,5
-2,Pop,01/01/1970,Género de música popular que se caracteriza por tener una estructura de canción sencilla y pegajosa.,4
