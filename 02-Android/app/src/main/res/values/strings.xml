@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">HolaMundo</string>
     <string name="saludo">Buenas tardes default</string>
+    <string-array name="string_array_opciones_dialogo">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miercoles</item>
+    </string-array>
 </resources>

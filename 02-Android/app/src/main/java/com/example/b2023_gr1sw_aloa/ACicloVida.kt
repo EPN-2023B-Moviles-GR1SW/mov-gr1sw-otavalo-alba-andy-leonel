@@ -3,7 +3,6 @@ package com.example.b2023_gr1sw_aloa
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import com.google.android.material.snackbar.Snackbar
 
 class ACicloVida : AppCompatActivity() {
