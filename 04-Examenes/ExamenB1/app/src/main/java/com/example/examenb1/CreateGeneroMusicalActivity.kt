@@ -21,24 +21,29 @@ class CreateGeneroMusicalActivity : AppCompatActivity() {
             irActividad(MainActivity::class.java)
         }
 
+        val btnBackC = findViewById<Button>(R.id.btn_back_create_g)
+        btnBackC.setOnClickListener {
+            irActividad(MainActivity::class.java)
+        }
+
 
     }
 
 
     fun crearGeneroMusical(){
         // Obtener componentes visuales
-        val id = findViewById<EditText>(R.id.et_id)
-        val nombre = findViewById<EditText>(R.id.et_nombre)
+        val id = findViewById<EditText>(R.id.input_id)
+        val nombre = findViewById<EditText>(R.id.input_nombre)
         val descripcion = findViewById<EditText>(
-            R.id.et_descripcion
+            R.id.input_descripcion
         )
 
         val fechaCreacion = findViewById<EditText>(
-            R.id.et_fecha
+            R.id.input_fecha
         )
 
         val popularidad = findViewById<EditText>(
-            R.id.et_popularidad
+            R.id.input_popularidad
         )
 
         CrudGeneroMusical().crearGeneroMusical(

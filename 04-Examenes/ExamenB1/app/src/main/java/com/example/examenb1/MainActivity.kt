@@ -127,19 +127,21 @@ class MainActivity : AppCompatActivity() {
         )
         listView.adapter = adaptador
         adaptador.notifyDataSetChanged()
+
+        var idGeneroAEliminar = arregloGeneroMusical[id].id
+        CrudGeneroMusical().eliminarCancionesDelGenero(idGeneroAEliminar)
         arregloGeneroMusical.removeAt(
             id
         )
     }
 
-    fun abrirDialogo(id: Int){
+    fun abrirDialogo(id: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Desea eliminar")
         builder.setPositiveButton(
             "Aceptar",
-            DialogInterface.OnClickListener{ dialog, which ->
+            DialogInterface.OnClickListener { dialog, which ->
                 eliminarGeneroMusical(id)
-                CrudGeneroMusical().eliminarCancionesDelGenero(id)
                 mostrarSnackbar("Genero Musical eliminado")
             }
         )

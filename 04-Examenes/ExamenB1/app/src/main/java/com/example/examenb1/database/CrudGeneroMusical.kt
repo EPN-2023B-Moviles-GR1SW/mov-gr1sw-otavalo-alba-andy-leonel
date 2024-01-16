@@ -52,12 +52,9 @@ class CrudGeneroMusical {
         }
 
         canciones.forEach { cancion ->
-            val cancionAux = DBMemoria.arregloCancion.find { cancion ->
-                cancion.id == cancion.id
+            DBMemoria.arregloCancion.removeIf { cancionAux ->
+                cancionAux.id == cancion.id
             }
-
-            val posicion = DBMemoria.arregloCancion.indexOf(cancionAux)
-            DBMemoria.arregloCancion.removeAt(posicion)
         }
     }
 

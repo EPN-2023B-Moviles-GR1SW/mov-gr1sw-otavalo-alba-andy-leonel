@@ -1,6 +1,5 @@
 package com.example.examenb1.models
 
-import java.text.SimpleDateFormat
 import java.util.Date
 
 class Cancion(

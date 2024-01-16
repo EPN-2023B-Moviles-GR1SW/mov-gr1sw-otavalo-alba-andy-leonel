@@ -32,6 +32,10 @@ class EditGeneroMusicalActivity : AppCompatActivity() {
 
         }
 
+        val btnBack = findViewById<Button>(R.id.btn_back_edit_g)
+        btnBack.setOnClickListener {
+            irActividad(MainActivity::class.java)
+        }
     }
 
     fun mostrarSnackbar(texto: String) {
@@ -69,7 +73,6 @@ class EditGeneroMusicalActivity : AppCompatActivity() {
             id.text.toString().toInt(),
             nombre.text.toString(),
             SimpleDateFormat("dd/MM/yyyy").parse(fechaCreacion.text.toString()),
-
             descripcion.text.toString(),
             popularidad.text.toString().toInt()
         )
