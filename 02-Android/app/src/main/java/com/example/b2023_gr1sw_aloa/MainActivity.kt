@@ -114,6 +114,12 @@ class MainActivity : AppCompatActivity() {
             .setOnClickListener {
                 irActividad(FRecyclerView::class.java)
             }
+
+        val botonGoogleMaps = findViewById<Button>(R.id.btn_google_maps)
+        botonGoogleMaps
+            .setOnClickListener {
+                irActividad(GGoogleMapsActivity::class.java)
+            }
     } // Termina onCreate
 
     fun abrirActividadConParametros(
@@ -121,9 +127,9 @@ class MainActivity : AppCompatActivity() {
     ) {
         val intentExplicito = Intent(this, clase)
         // Enviar parametros (solamente variables primitivas)
-        intentExplicito.putExtra("nombre", "Adrian")
-        intentExplicito.putExtra("apellido", "Eguez")
-        intentExplicito.putExtra("edad", 34)
+        intentExplicito.putExtra("nombre", "Leonel")
+        intentExplicito.putExtra("apellido", "Otavalo")
+        intentExplicito.putExtra("edad", 21)
 
         callbackContenidoIntentExplicito.launch(intentExplicito)
     }
