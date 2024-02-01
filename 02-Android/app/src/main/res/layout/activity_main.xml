@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.477" />
 
     <Button
-        android:id="@+id/btn_ciclo_vida"
+        android:id="@+id/btn_ciclo_vida2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -37,10 +37,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:text="L. View"
-        app:layout_constraintBottom_toTopOf="@+id/btn_ciclo_vida"
-        app:layout_constraintEnd_toEndOf="@+id/btn_ciclo_vida"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ciclo_vida2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btn_ciclo_vida" />
+        app:layout_constraintStart_toStartOf="@+id/btn_ciclo_vida2" />
 
     <Button
         android:id="@+id/btn_ir_intent_implicito"
@@ -69,34 +69,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="SQLite"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_ciclo_vida"
-        app:layout_constraintStart_toEndOf="@+id/btn_ciclo_vida"
-        app:layout_constraintTop_toTopOf="@+id/btn_ciclo_vida"
+        android:text="Sqlite"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintStart_toEndOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintTop_toTopOf="@+id/btn_ciclo_vida2"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btn_recycler_view"
+        android:id="@+id/btn_revcycler_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:text="R. View"
         app:layout_constraintBottom_toTopOf="@+id/btn_sqlite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.352"
-        app:layout_constraintStart_toEndOf="@+id/btn_ir_list_view"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_sqlite"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_sqlite" />
 
     <Button
         android:id="@+id/btn_google_maps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="G. Maps"
-        app:layout_constraintBottom_toTopOf="@+id/btn_recycler_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
-        app:layout_constraintStart_toEndOf="@+id/btn_ir_intent_implicito"
+        app:layout_constraintBottom_toTopOf="@+id/btn_revcycler_view"
+        app:layout_constraintEnd_toEndOf="@+id/btn_revcycler_view"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btn_revcycler_view" />
+
+    <Button
+        android:id="@+id/btn_intent_firebase_ui"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:text="F. Auth"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintTop_toTopOf="@+id/btn_ciclo_vida2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_intent_firestore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Firestore"
+        app:layout_constraintBottom_toTopOf="@+id/btn_intent_firebase_ui"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ir_list_view"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintVertical_bias="0.89" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
