@@ -1,61 +1,37 @@
 package com.example.examenb1.database
 
-import com.example.examenb1.models.GeneroMusical
-import java.util.Date
-
 class CrudGeneroMusical {
     fun crearGeneroMusical(
-        id: Int,
         nombre: String,
-        fechaCreacion: Date,
+        fechaCreacion: String,
         descripcion: String,
         popularidad: Int
-    ) {
+    ): Boolean {
 
-        val generoMusical = GeneroMusical(
-            id,
-            nombre,
-            fechaCreacion,
-            descripcion,
-            popularidad
+        val respuesta = DBSQLite.tablaGeneroMusical!!.crearGeneroMusical(
+            nombre, descripcion, fechaCreacion, popularidad
         )
-
-        DBMemoria.arregloGeneroMusical.add(generoMusical)
+        return respuesta
     }
 
     fun editarGeneroMusical(
         id: Int,
         nombre: String,
-        fechaCreacion: Date,
+        fechaCreacion: String,
         descripcion: String,
         popularidad: Int
-    ) {
-        val generoMusical = GeneroMusical(
-            id,
-            nombre,
-            fechaCreacion,
-            descripcion,
-            popularidad
+    ):Boolean {
+
+        val respuesta = DBSQLite.tablaGeneroMusical!!.actualizarGeneroMusicalFormulario(
+            nombre, descripcion, fechaCreacion, popularidad,id
         )
 
-        val generoAux = DBMemoria.arregloGeneroMusical.find { generoMusical ->
-            generoMusical.id == id
-        }
-
-        val posicion = DBMemoria.arregloGeneroMusical.indexOf(generoAux)
-        DBMemoria.arregloGeneroMusical[posicion] = generoMusical
+        return respuesta
     }
 
-    fun eliminarCancionesDelGenero(id: Int) {
-        val canciones = DBMemoria.arregloCancion.filter { cancion ->
-            cancion.genero.id == id
-        }
-
-        canciones.forEach { cancion ->
-            DBMemoria.arregloCancion.removeIf { cancionAux ->
-                cancionAux.id == cancion.id
-            }
-        }
+    fun eliminarGeneroMusical(id: Int):Boolean {
+        val respuesta = DBSQLite.tablaGeneroMusical!!.eliminarGeneroMusicalFormulario(id)
+        return respuesta
     }
 
 }

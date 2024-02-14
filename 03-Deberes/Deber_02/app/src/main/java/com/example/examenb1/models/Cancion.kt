@@ -6,7 +6,7 @@ class Cancion(
     var id: Int,
     var nombre: String,
     var duracion: Int,
-    var genero: GeneroMusical,
+    var generoId: Int,
     var esColaborativa: Boolean,
     var fechaLanzamiento: Date
 ) {

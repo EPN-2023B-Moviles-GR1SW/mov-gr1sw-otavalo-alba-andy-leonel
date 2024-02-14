@@ -9,7 +9,6 @@ import android.content.Intent
 import android.widget.EditText
 import com.example.examenb1.database.CrudCancion
 import java.lang.Integer.parseInt
-import java.text.SimpleDateFormat
 
 class CreateCancionActivity : AppCompatActivity() {
 
@@ -52,12 +51,11 @@ class CreateCancionActivity : AppCompatActivity() {
         val fechaLanzamiento = findViewById<EditText>(R.id.input_fecha_c)
 
         CrudCancion().crearCancion(
-            id.text.toString().toInt(),
             nombre.text.toString(),
-            SimpleDateFormat("dd/MM/yyyy").parse(fechaLanzamiento.text.toString()),
             duracion.text.toString().toInt(),
             idgenero,
             esColaborativa,
+            fechaLanzamiento.text.toString(),
         )
 
         mostrarSnackbar("Se ha creado la canción ${nombre.text} y el id genero es $idgenero")

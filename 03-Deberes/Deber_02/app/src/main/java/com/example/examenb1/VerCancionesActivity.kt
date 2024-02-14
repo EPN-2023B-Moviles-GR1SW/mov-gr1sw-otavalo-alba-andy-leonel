@@ -14,14 +14,13 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
-import com.example.examenb1.database.DBMemoria
+import com.example.examenb1.database.DBSQLite
 import com.example.examenb1.models.Cancion
 import com.google.android.material.snackbar.Snackbar
 import java.lang.Integer.parseInt
 
 class VerCancionesActivity : AppCompatActivity() {
 
-    val arregloCanciones = DBMemoria.arregloCancion
     var posicionItemSeleccionado = -1
     var arregloCancionesPorGenero = arrayListOf<Cancion>()
     override fun onCreateContextMenu(
@@ -64,8 +63,7 @@ class VerCancionesActivity : AppCompatActivity() {
         val idGenero = intent.getStringExtra("id")
         mostrarSnackbar("Ver canciones de: $idGenero")
 
-        arregloCancionesPorGenero =
-            arregloCanciones.filter { cancion -> cancion.genero.id == parseInt(idGenero) } as ArrayList<Cancion>
+        arregloCancionesPorGenero = DBSQLite.tablaCancion!!.obtenerTodasCanciones(parseInt(idGenero))
 
         val listView = findViewById<ListView>(R.id.lv_list_canciones)
         val adaptador = ArrayAdapter(
@@ -125,10 +123,10 @@ class VerCancionesActivity : AppCompatActivity() {
         listView.adapter = adaptador
         adaptador.notifyDataSetChanged()
 
-        val idCancionAEliminar = arregloCancionesPorGenero[id].id
-        arregloCancionesPorGenero.removeAt(id)
-
-        DBMemoria.arregloCancion.removeIf { cancion -> cancion.id == idCancionAEliminar }
+        val resultado = DBSQLite.tablaCancion!!.eliminarCancionFormulario(id)
+        if (resultado) {
+            adaptador.notifyDataSetChanged()
+        }
     }
 
     fun abrirDialogo(id: Int) {

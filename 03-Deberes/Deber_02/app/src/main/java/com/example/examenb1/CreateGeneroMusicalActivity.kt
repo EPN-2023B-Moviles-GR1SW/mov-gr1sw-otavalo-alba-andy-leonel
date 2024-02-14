@@ -47,9 +47,8 @@ class CreateGeneroMusicalActivity : AppCompatActivity() {
         )
 
         CrudGeneroMusical().crearGeneroMusical(
-            id.text.toString().toInt(),
             nombre.text.toString(),
-            SimpleDateFormat("dd/MM/yyyy").parse(fechaCreacion.text.toString()),
+            fechaCreacion.text.toString(),
             descripcion.text.toString(),
             popularidad.text.toString().toInt()
         )

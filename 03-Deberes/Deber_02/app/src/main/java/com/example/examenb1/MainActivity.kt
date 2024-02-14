@@ -12,14 +12,15 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.examenb1.database.CrudGeneroMusical
-import com.example.examenb1.database.DBMemoria
+import com.example.examenb1.database.DBSQLite
+import com.example.examenb1.database.ESqliteHelperGeneroMusical
+import com.example.examenb1.models.GeneroMusical
 import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
 
-    val arregloGeneroMusical = DBMemoria.arregloGeneroMusical
+    var arregloGeneroMusical = ArrayList<GeneroMusical>()
     var posicionItemSeleccionado = -1
     override fun onCreateContextMenu(
         menu: ContextMenu?,
@@ -40,13 +41,15 @@ class MainActivity : AppCompatActivity() {
     override fun onContextItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mi_editar -> {
-                val selectedItem = arregloGeneroMusical[posicionItemSeleccionado]
+
+                val idGeneroMusical = arregloGeneroMusical[posicionItemSeleccionado].id
+
                 // Crear un Intent para iniciar VerCancionesActivity
                 val intent = Intent(this, EditGeneroMusicalActivity::class.java)
 
                 // Pasar el parámetro "nombre" al Intent
-                intent.putExtra("id", selectedItem.id.toString())
-
+                intent.putExtra("id", idGeneroMusical.toString())
+//                mostrarSnackbar("Genero Musical editado $idGeneroMusical")
                 // Iniciar la actividad VerCancionesActivity
                 startActivity(intent)
                 return true
@@ -58,12 +61,13 @@ class MainActivity : AppCompatActivity() {
             }
 
             R.id.mi_ver_canciones -> {
-                val selectedItem = arregloGeneroMusical[posicionItemSeleccionado]
+                val idGeneroMusical = arregloGeneroMusical[posicionItemSeleccionado].id
+
                 // Crear un Intent para iniciar VerCancionesActivity
                 val intent = Intent(this, VerCancionesActivity::class.java)
 
                 // Pasar el parámetro "nombre" al Intent
-                intent.putExtra("id", selectedItem.id.toString())
+                intent.putExtra("id", idGeneroMusical)
 
                 // Iniciar la actividad VerCancionesActivity
                 startActivity(intent)
@@ -89,7 +93,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        DBSQLite.tablaGeneroMusical = ESqliteHelperGeneroMusical(this)
+        arregloGeneroMusical = DBSQLite.tablaGeneroMusical!!.obtenerTodosGenerosMusicales()
         val listView = findViewById<ListView>(R.id.lv_list_genero_musical)
         val adaptador = ArrayAdapter(
             this, // Contexto
@@ -128,11 +133,7 @@ class MainActivity : AppCompatActivity() {
         listView.adapter = adaptador
         adaptador.notifyDataSetChanged()
 
-        var idGeneroAEliminar = arregloGeneroMusical[id].id
-        CrudGeneroMusical().eliminarCancionesDelGenero(idGeneroAEliminar)
-        arregloGeneroMusical.removeAt(
-            id
-        )
+        DBSQLite.tablaGeneroMusical!!.eliminarGeneroMusicalFormulario(id)
     }
 
     fun abrirDialogo(id: Int) {
@@ -141,7 +142,8 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton(
             "Aceptar",
             DialogInterface.OnClickListener { dialog, which ->
-                eliminarGeneroMusical(id)
+                val idGeneroMusical = arregloGeneroMusical[id].id
+                eliminarGeneroMusical(idGeneroMusical)
                 mostrarSnackbar("Genero Musical eliminado")
             }
         )

@@ -7,10 +7,8 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import com.example.examenb1.database.CrudCancion
-import com.example.examenb1.database.CrudGeneroMusical
-import com.example.examenb1.database.DBMemoria
+import com.example.examenb1.database.DBSQLite
 import com.example.examenb1.models.Cancion
-import com.example.examenb1.models.GeneroMusical
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 
@@ -21,7 +19,7 @@ class EditCancionActivity : AppCompatActivity() {
 
         val idCancion = intent.getIntExtra("idCancion", 0)
 
-        val cancion = DBMemoria.arregloCancion.find { cancion -> cancion.id == idCancion }
+        val cancion = DBSQLite.tablaCancion!!.consultarCancionPorId(idCancion)
 
         llenarInputs(cancion!!)
 
@@ -31,14 +29,14 @@ class EditCancionActivity : AppCompatActivity() {
             mostrarSnackbar("Cancion actualizada")
 
             val intent = Intent(this, VerCancionesActivity::class.java)
-            intent.putExtra("id", cancion.genero.id.toString())
+            intent.putExtra("id", cancion.generoId.toString())
             startActivity(intent)
         }
 
         val btnBack = findViewById<Button>(R.id.btn_back_edit_c)
         btnBack.setOnClickListener {
             val intent = Intent(this, VerCancionesActivity::class.java)
-            intent.putExtra("id", cancion.genero.id.toString())
+            intent.putExtra("id", cancion.generoId.toString())
             startActivity(intent)
         }
 
@@ -75,8 +73,8 @@ class EditCancionActivity : AppCompatActivity() {
         val fechaLanzamiento = findViewById<EditText>(R.id.et_fecha_c)
         val esColaborativa = findViewById<CheckBox>(R.id.chk_colaborativa)
         val idCancion = intent.getIntExtra("idCancion", 0)
-        val cancion = DBMemoria.arregloCancion.find { cancion -> cancion.id == idCancion }
-        val idgenero = cancion!!.genero.id
+        val cancion = DBSQLite.tablaCancion!!.consultarCancionPorId(idCancion)
+        val idgenero = cancion!!.generoId
 
 
 
@@ -84,17 +82,11 @@ class EditCancionActivity : AppCompatActivity() {
         CrudCancion().editarCancion(
             id.text.toString().toInt(),
             nombre.text.toString(),
-            SimpleDateFormat("dd/MM/yyyy").parse(fechaLanzamiento.text.toString()),
             duracion.text.toString().toInt(),
             idgenero,
-            esColaborativa.isChecked
+            esColaborativa.isChecked,
+            fechaLanzamiento.text.toString(),
         )
     }
 
-    fun irActividad(
-        clase: Class<*>
-    ) {
-        val intent = Intent(this, clase)
-        startActivity(intent)
-    }
 }

@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import com.example.examenb1.database.CrudGeneroMusical
-import com.example.examenb1.database.DBMemoria
+import com.example.examenb1.database.DBSQLite
+import com.example.examenb1.database.ESqliteHelperGeneroMusical
 import com.example.examenb1.models.GeneroMusical
 import com.google.android.material.snackbar.Snackbar
 import java.lang.Integer.parseInt
@@ -16,12 +17,11 @@ class EditGeneroMusicalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_genero_musical)
+        DBSQLite.tablaGeneroMusical = ESqliteHelperGeneroMusical(this)
         val idGenero = intent.getStringExtra("id")
-
-        val genero =
-            DBMemoria.arregloGeneroMusical.find { genero -> genero.id == parseInt(idGenero) }
+        val genero = DBSQLite.tablaGeneroMusical!!.consultarGeneroMusicalPorId(idGenero!!)
         llenarInputs(genero!!)
-        mostrarSnackbar("$genero")
+//        mostrarSnackbar("$idGenero")
 
 
         val btnActualizar = findViewById<Button>(R.id.btn_actualizar_genero)
@@ -72,7 +72,7 @@ class EditGeneroMusicalActivity : AppCompatActivity() {
         CrudGeneroMusical().editarGeneroMusical(
             id.text.toString().toInt(),
             nombre.text.toString(),
-            SimpleDateFormat("dd/MM/yyyy").parse(fechaCreacion.text.toString()),
+           fechaCreacion.text.toString(),
             descripcion.text.toString(),
             popularidad.text.toString().toInt()
         )
