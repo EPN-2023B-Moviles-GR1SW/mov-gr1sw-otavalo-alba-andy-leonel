@@ -23,6 +23,11 @@ class EditGeneroMusicalActivity : AppCompatActivity() {
             btnActualizar.setOnClickListener {
                 actualizarGeneroMusical()
             }
+
+            val btnBack = findViewById<Button>(R.id.btn_back_edit_g)
+            btnBack.setOnClickListener {
+                irActividad(MainActivity::class.java)
+            }
         }else{
             mostrarSnackbar("No se ha encontrado el id del genero")
             irActividad(MainActivity::class.java)
